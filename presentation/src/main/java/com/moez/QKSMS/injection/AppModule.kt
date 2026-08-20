@@ -84,6 +84,7 @@ import com.moez.QKSMS.repository.ScheduledMessageRepository
 import com.moez.QKSMS.repository.ScheduledMessageRepositoryImpl
 import com.moez.QKSMS.repository.SyncRepository
 import com.moez.QKSMS.repository.SyncRepositoryImpl
+import com.moez.QKSMS.repository.VerificationCodeForwarderImpl
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -216,5 +217,11 @@ class AppModule(private var application: Application) {
 
     @Provides
     fun provideSyncRepository(repository: SyncRepositoryImpl): SyncRepository = repository
+
+    @Provides
+    @Singleton
+    fun provideVerificationCodeForwarder(context: Context): com.moez.QKSMS.interactor.VerificationCodeForwarder {
+        return VerificationCodeForwarderImpl(context)
+    }
 
 }

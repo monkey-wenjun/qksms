@@ -36,9 +36,11 @@ buildscript {
     ext.abiCodes = ['armeabi-v7a': 1, 'arm64-v8a': 2]
 
     repositories {
-        maven { url 'https://maven.google.com' }
-        jcenter()
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
         google()
+        mavenCentral()
     }
 
     dependencies {
@@ -52,15 +54,17 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         google()
-        jcenter()
+        mavenCentral()
         maven { url "https://jitpack.io" }
-        maven { url 'https://maven.google.com' }
         maven {
             name 'glide-snapshot'
             url 'https://oss.sonatype.org/content/repositories/snapshots'
         }
-        mavenCentral()
     }
 }
 

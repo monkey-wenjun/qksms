@@ -39,7 +39,7 @@
 
     <application
         android:name=".common.QKApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
@@ -117,6 +117,9 @@
         <activity android:name=".feature.scheduled.ScheduledActivity" />
         <activity android:name=".feature.backup.BackupActivity" />
         <activity android:name=".feature.contacts.ContactsActivity" />
+        <activity
+            android:name=".feature.verification.VerificationCodeSettingsActivity"
+            android:label="验证码转发设置" />
 
         <receiver android:name=".receiver.BootReceiver">
             <intent-filter>

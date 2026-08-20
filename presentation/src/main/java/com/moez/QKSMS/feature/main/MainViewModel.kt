@@ -263,6 +263,7 @@ class MainViewModel @Inject constructor(
                         NavItem.SCHEDULED -> navigator.showScheduled()
                         NavItem.BLOCKING -> navigator.showBlockedConversations()
                         NavItem.SETTINGS -> navigator.showSettings()
+                        NavItem.VERIFICATION -> navigator.showVerificationSettings()
                         NavItem.PLUS -> navigator.showQksmsPlusActivity("main_menu")
                         NavItem.HELP -> navigator.showSupport()
                         NavItem.INVITE -> navigator.showInvite()

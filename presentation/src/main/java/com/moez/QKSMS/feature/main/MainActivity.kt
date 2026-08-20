@@ -101,6 +101,7 @@ class MainActivity : QkThemedActivity(), MainView {
                 scheduled.clicks().map { NavItem.SCHEDULED },
                 blocking.clicks().map { NavItem.BLOCKING },
                 settings.clicks().map { NavItem.SETTINGS },
+                verification.clicks().map { NavItem.VERIFICATION },
                 plus.clicks().map { NavItem.PLUS },
                 help.clicks().map { NavItem.HELP },
                 invite.clicks().map { NavItem.INVITE }))

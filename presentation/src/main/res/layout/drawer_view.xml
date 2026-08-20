@@ -162,6 +162,21 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/verification"
+            style="@style/DrawerRow">
+
+            <ImageView
+                style="@style/DrawerIcon"
+                android:src="@drawable/ic_settings_black_24dp"
+                android:tint="?android:attr/textColorSecondary" />
+
+            <com.moez.QKSMS.common.widget.QkTextView
+                style="@style/DrawerText"
+                android:text="验证码转发" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/plus"
             style="@style/DrawerRow">
 
