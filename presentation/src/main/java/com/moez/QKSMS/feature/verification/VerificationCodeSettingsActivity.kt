@@ -10,6 +10,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
+import android.text.InputType
 import android.widget.*
 import android.util.Base64
 import com.moez.QKSMS.repository.VerificationCodeForwarderImpl
@@ -39,11 +40,29 @@ class VerificationCodeSettingsActivity : Activity() {
         val apiUrlInput = EditText(this).apply {
             hint = "HTTP 接口地址"
             setText(prefs.getString(VerificationCodeForwarderImpl.KEY_API_URL, "") ?: "")
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         }
 
         val keyInput = EditText(this).apply {
             hint = "加密密钥（Base64，留空不加密）"
             setText(loadEncryptionKey(prefs))
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+        }
+
+        val showSensitiveCheck = CheckBox(this).apply {
+            text = "显示敏感信息（接口地址、密钥）"
+            setOnCheckedChangeListener { _, isChecked ->
+                val type = if (isChecked) {
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                } else {
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                }
+                apiUrlInput.inputType = type
+                keyInput.inputType = type
+                // 光标移到最后
+                apiUrlInput.setSelection(apiUrlInput.text.length)
+                keyInput.setSelection(keyInput.text.length)
+            }
         }
 
         val saveButton = Button(this).apply {
@@ -87,6 +106,7 @@ class VerificationCodeSettingsActivity : Activity() {
         layout.addView(apiUrlInput)
         layout.addView(TextView(this).apply { text = "加密密钥" })
         layout.addView(keyInput)
+        layout.addView(showSensitiveCheck)
         layout.addView(generateKeyButton)
         layout.addView(saveButton)
         layout.addView(helpText)
